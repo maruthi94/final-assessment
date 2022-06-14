@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+ webapp:
+  depends_on:
+   - mongo
+  build:
+   context: .
+  ports:
+   - 8080:8080
+  environment:
+   - PORT=8080
+   - JWT_SECRET_KEY="test_secret_@123"
+   - DB_CONNECTION_STRING=mongodb://mongo:27017/sample
+
+ mongo:
+  image: mongo:4.2.8
+  ports:
+   - 27017:27017
+  volumes:
+   - mongodb:/data/db
+   - mongodb_config:/data/configdb
+volumes:
+ mongodb:
+ mongodb_config:
