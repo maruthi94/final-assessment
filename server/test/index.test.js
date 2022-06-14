@@ -74,7 +74,7 @@ describe("#Unit test -  User API's", () => {
         const user = {
             firstName: 'james',
             lastName: 'bond',
-            email: 'james2.bond@gmail.com',
+            email: 'hello.world@gmail.com',
             password: 'pwd@1234',
         };
         beforeEach(async () => {
