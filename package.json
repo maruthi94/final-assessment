@@ -5,11 +5,11 @@
         "server"
     ],
     "scripts": {
-        "start:server": "cd server && npm start",
-        "start:client": "cd client && npm start",
+        "start:server": "yarn workspace server start",
+        "start:client": "yarn workspace client start",
+        "start": "yarn run start:server && yarn run start:client",
         "build":"yarn workspace client build",
-        "pretest": "set NODE_ENV=test",
-        "test":"yarn workspace client test && yarn workspace server test",
+        "test":"yarn workspace client test --watchAll=false && yarn workspace server test",
         "postbuild": "node build-helper",
         "predocker:compose:up":"yarn run build",
         "docker:compose:up":"docker-compose -f docker-compose.dev.yml up --build"

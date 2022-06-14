@@ -11,13 +11,14 @@ require('./config')();
 
 const port = process.env.PORT || 4000;
 
+const NODE_ENV = process.env?.NODE_ENV.trim();
 
 app.use(morgan('combined'));
 app.use(express.json({}));
 app.use(cors());
 app.use(helmet());
 
-if (process.env.NODE_ENV === 'production') {
+if ( NODE_ENV === 'production') {
     app.use(express.static(__dirname + '/public'));
     app.get('*', function (req, res) {
         console.log(path.resolve(__dirname,'public', 'index.html'));
@@ -29,7 +30,7 @@ app.use('/api/users', usersRouter);
 
 app.use(errorHandler);
 
-if (process.env.NODE_ENV && process.env.NODE_ENV !== 'test') {
+if (NODE_ENV !== 'test') {
     initializeDatabase();
     app.listen(port, () => console.log(`Server started successfully listening to port:${port}`));
 }
